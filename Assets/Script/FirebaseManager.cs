@@ -221,6 +221,24 @@ public class FirebaseManager : MonoBehaviour
                     }
                     else
                     {
+                        //
+                        User user = new User();
+                        user.UserName = _username;
+                        user.Email = _email;
+                        string json = JsonUtility.ToJson(user);
+
+                        //
+                        DBreference.Child("User").Child(user.UserName).SetRawJsonValueAsync(json).ContinueWith(task=>{
+                            
+                        if(task.IsCompleted)
+                            {
+                                Debug.Log("Sucess");
+                            }
+                            else{
+                                Debug.Log("bbq liao, dk why not working");
+                            }
+                        });
+
                         //Username is now set
                         //Now return to login screen
                         UIManager.instance.LoginScreen();
@@ -282,4 +300,6 @@ public class FirebaseManager : MonoBehaviour
         Debug.Log("Quit!");
         Application.Quit();
     }
+
+
 }

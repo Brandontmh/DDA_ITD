@@ -8,6 +8,7 @@ public class User : MonoBehaviour{
     public int Hp;
     public int TimeStamp;
     public int score;
+    public long updatedOn;
 
 
 }

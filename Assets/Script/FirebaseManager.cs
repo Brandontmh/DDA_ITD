@@ -251,6 +251,22 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
+    public void ForgetPassword()
+    {
+        string email = emailLoginField.text.Trim();
+        auth.SendPasswordResetEmailAsync(email).ContinueWith(task =>
+        {
+            if (task.IsFaulted || task.IsCanceled)
+            {
+                Debug.LogError("Sorry, there was an error sending a password reset, ERROR: " + dependencyStatus);
+            }
+            else
+            {
+                Debug.Log("Forget password email sent successfully...");
+            }
+        });
+    }
+
     private IEnumerator UpdateUsernameAuth(string _username)
     {
         //Create a user profile and set the username

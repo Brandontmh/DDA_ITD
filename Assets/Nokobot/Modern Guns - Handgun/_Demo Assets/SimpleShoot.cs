@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [AddComponentMenu("Nokobot/Modern Guns/Simple Shoot")]
 public class SimpleShoot : MonoBehaviour
@@ -28,6 +29,9 @@ public class SimpleShoot : MonoBehaviour
 
         if (gunAnimator == null)
             gunAnimator = GetComponentInChildren<Animator>();
+
+        XRGrabInteractable grabbable = GetComponent<XRGrabInteractable>();
+        grabbable.activated.AddListener(Shoot);
     }
 
     /*void Update()
@@ -44,7 +48,7 @@ public class SimpleShoot : MonoBehaviour
 
 
     //This function creates the bullet behavior
-    public void Shoot()
+    public void Shoot(ActivateEventArgs arg)
     {
         if (muzzleFlashPrefab)
         {

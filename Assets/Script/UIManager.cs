@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     {
         loginUI.SetActive(false);
         registerUI.SetActive(false);
+        //ScoreboardScreen.SetActive(false);
     }
 
     public void LoginScreen() //Back button
@@ -50,4 +51,8 @@ public class UIManager : MonoBehaviour
         ClearScreen();
         mainMenuUI.SetActive(true);
     }
+
+
+
 }
+

@@ -3883,7 +3883,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1325514614}
-  m_RootOrder: 61
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &406046808
 BoxCollider:
@@ -8982,7 +8982,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1325514614}
-  m_RootOrder: 60
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1015350800
 BoxCollider:
@@ -10665,6 +10665,13 @@ MonoBehaviour:
   passwordRegisterField: {fileID: 0}
   passwordRegisterVerifyField: {fileID: 0}
   warningRegisterText: {fileID: 0}
+  score: {fileID: 0}
+  HealthBarField: {fileID: 0}
+  deathsField: {fileID: 0}
+  killsField: {fileID: 0}
+  TimeStamp: {fileID: 0}
+  scoreElement: {fileID: 0}
+  scoreboardContent: {fileID: 0}
 --- !u!114 &1234322998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12155,14 +12162,19 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1982486274}
+  - {fileID: 1617493244}
   - {fileID: 836361513}
   - {fileID: 12915220}
   - {fileID: 1072749638}
+  - {fileID: 2056117823}
   - {fileID: 1290893499}
+  - {fileID: 2117987581}
   - {fileID: 1258252866}
+  - {fileID: 1015350799}
+  - {fileID: 406046807}
+  - {fileID: 1736206605}
   - {fileID: 332762108}
   - {fileID: 780906303}
-  - {fileID: 1617493244}
   - {fileID: 727034808}
   - {fileID: 1374752849}
   - {fileID: 318104263}
@@ -12199,8 +12211,6 @@ Transform:
   - {fileID: 1922469221}
   - {fileID: 905448670}
   - {fileID: 601556203}
-  - {fileID: 2056117823}
-  - {fileID: 2117987581}
   - {fileID: 447842078}
   - {fileID: 5832249}
   - {fileID: 1178210806}
@@ -12214,9 +12224,6 @@ Transform:
   - {fileID: 1961037687}
   - {fileID: 1276787630}
   - {fileID: 1484719243}
-  - {fileID: 1015350799}
-  - {fileID: 406046807}
-  - {fileID: 1736206605}
   - {fileID: 1211356613}
   - {fileID: 505732261}
   m_Father: {fileID: 0}
@@ -13990,6 +13997,13 @@ MonoBehaviour:
   passwordRegisterField: {fileID: 346943902}
   passwordRegisterVerifyField: {fileID: 1415899375}
   warningRegisterText: {fileID: 1258178291}
+  score: {fileID: 0}
+  HealthBarField: {fileID: 0}
+  deathsField: {fileID: 0}
+  killsField: {fileID: 0}
+  TimeStamp: {fileID: 0}
+  scoreElement: {fileID: 0}
+  scoreboardContent: {fileID: 0}
 --- !u!1 &1597279579
 GameObject:
   m_ObjectHideFlags: 0
@@ -14105,7 +14119,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1325514614}
-  m_RootOrder: 8
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1617493245
 BoxCollider:
@@ -15533,7 +15547,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1325514614}
-  m_RootOrder: 62
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1736206606
 BoxCollider:
@@ -19047,7 +19061,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1325514614}
-  m_RootOrder: 45
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2056117824
 BoxCollider:
@@ -19753,7 +19767,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1325514614}
-  m_RootOrder: 46
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2117987582
 BoxCollider:

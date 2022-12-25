@@ -7,11 +7,38 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
+    public GameObject PauseMenu;
+
 
     //Screen object variables
     public GameObject loginUI;
     public GameObject registerUI;
     public GameObject mainMenuUI;
+    public bool isPaused;
+
+    void Start()
+    {
+        PauseMenu.SetActive(false);
+    }
+
+    /* void Update()
+    {
+    //Change button input
+        if (Input.Get(keyCode.menuButton))
+        {
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }       
+        }
+    } */
+
+
+
 
     private void Awake()
     {
@@ -52,7 +79,28 @@ public class UIManager : MonoBehaviour
         mainMenuUI.SetActive(true);
     }
 
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        isPaused = true;
+    }
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        isPaused = false;
+    }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit");
+       
+    }
+
+    public void SaveGame()
+    {
+
+    }
 
 }
 

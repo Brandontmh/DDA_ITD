@@ -30,8 +30,6 @@ public class SimpleShoot : MonoBehaviour
         if (gunAnimator == null)
             gunAnimator = GetComponentInChildren<Animator>();
 
-        XRGrabInteractable grabbable = GetComponent<XRGrabInteractable>();
-        grabbable.activated.AddListener(Shoot);
     }
 
     /*void Update()

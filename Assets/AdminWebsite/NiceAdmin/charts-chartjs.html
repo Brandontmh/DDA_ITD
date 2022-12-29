@@ -28,6 +28,8 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+ 
+
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.4.1
@@ -86,7 +88,9 @@
 
     <div class="pagetitle">
       <h1>Chart.js</h1>
-      <h9>Search Player : </h9><input type="text" placeholder="Search..">  <button type="button">Search</button>
+      <h9>Search Player : </h9><input type="text" id="SearchPlayer" placeholder="Search.."> 
+       <button type="button"  id="SearchBtn">Search</button>
+
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index1.html">Home</a></li>
@@ -97,50 +101,55 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
+    <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Player Activity</h5>
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Player Activity</h5>
-
-              <!-- Line Chart -->
-              <canvas id="lineChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#lineChart'), {
-                    type: 'line',
-                    data: {
-                      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                      datasets: [{
-                        label: 'No. of players',
-                        data: [65, 59, 80, 81, 56, 55, 40],
-                        fill: false,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                      }]
-                    },
-                    options: {
-                      scales: {
-                        y: {
-                          beginAtZero: true
-                        }
-                      }
+          <!-- Line Chart -->
+          <canvas id="lineChart" style="max-height: 400px;"></canvas>
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              new Chart(document.querySelector('#lineChart'), {
+                type: 'line',
+                data: {
+                  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                  datasets: [{
+                    label: 'No. of players',
+                    data: [65, 59, 80, 81, 56, 55, 40],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                  }]
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true
                     }
-                  });
-                });
-              </script>
-              <!-- End Line CHart -->
+                  }
+                }
+              });
+            });
 
-            </div>
-          </div>
+            
+          </script>
+          <!-- End Line CHart -->
+
+    
+
+
+
+
         </div>
+      </div>
+    </div>
 
         <div class="col-lg-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Player: Joy</h5>
-
+              <h5 class="card-title" id = "Name Change">Player:</h5>
               <!-- Bar Chart -->
               <canvas id="barChart" style="max-height: 400px;"></canvas>
               <script>
@@ -181,7 +190,63 @@
                       }
                     }
                   });
+
+
+
+
+                   // read data
+                SearchBtn.addEventListener('click',(e) => {
+
+                $('#dataTbl td').remove();
+                var usersNo=0; 
+                const dbRef = ref(db, 'User/');
+
+                onValue(dbRef, (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                const childKey = childSnapshot.key;
+                const childData = childSnapshot.val();
+                // ...
+                usersNo += 1; 
+                var trow = "<tr><td>" + usersNo + "</td><td>" + childData.name + "</td><td>" + childData.email + "</td></tr>"
+                $(trow).appendTo('IDdataTbl');
+
+                    });
+                    }, {
+                        onlyOnce: true
+                     });
+
+                   });
+                   
                 });
+
+                // Retrieve data
+
+               /*  const dbRef = ref(db, "User");
+                get(User).then((snapshot)=> {
+                  // Retrieve snapshot of the data using callbacks
+
+                  if (snapshot.exists()){
+                    try {
+                      var content = "";
+                      //Setup temp arrays
+                      var dates = [];
+                      var logs = [];
+                      snapshot.forEach((childSnapshot)=> {
+                        // push data to array for X/Y axes later
+
+                        dates.push(childSnapshot.key);
+                        logs.push(childSnapshot.size);
+                        console.log('Number of Players : ${childSnapshot.key}');
+                        console.log('looping child size: ${childSnapshot.size}');
+
+                      });
+                        makeChart(dates, logs);
+                    } catch (error)()
+                  }
+
+                }); */ //endget
+              
+                
               </script>
               <!-- End Bar CHart -->
 
@@ -189,65 +254,210 @@
           </div>
         </div>
 
-        <div class="col-lg-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Radar Chart</h5>
-
-              <!-- Radar Chart -->
-              <canvas id="radarChart" style="max-height: 400px;"></canvas>
-              <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                  new Chart(document.querySelector('#radarChart'), {
-                    type: 'radar',
-                    data: {
-                      labels: [
-                        'Eating',
-                        'Drinking',
-                        'Sleeping',
-                        'Designing',
-                        'Coding',
-                        'Cycling',
-                        'Running'
-                      ],
-                      datasets: [{
-                        label: 'First Dataset',
-                        data: [65, 59, 90, 81, 56, 55, 40],
-                        fill: true,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgb(255, 99, 132)',
-                        pointBackgroundColor: 'rgb(255, 99, 132)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(255, 99, 132)'
-                      }, {
-                        label: 'Second Dataset',
-                        data: [28, 48, 40, 19, 96, 27, 100],
-                        fill: true,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgb(54, 162, 235)',
-                        pointBackgroundColor: 'rgb(54, 162, 235)',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(54, 162, 235)'
-                      }]
-                    },
-                    options: {
-                      elements: {
-                        line: {
-                          borderWidth: 3
-                        }
-                      }
-                    }
-                  });
-                });
-              </script>
-              <!-- End Radar CHart -->
-
-            </div>
+        <div class="col-md-6">
+          <form>
+            <h1>Admin : Create,Search,Edit and Delete User</h1>
+            <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" id="Playername" placeholder="Enter Username">
           </div>
-        </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter Password">
+          </div>
 
+          <br>
+          <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" id="getData" class="btn btn-primary">Search</button>         
+          <button type="submit" id="deleteData" class="btn btn-primary">Delete</button>
+        </form>
+        </div>
+        
+
+        <div class="card-body">
+          <h5 class="card-title">Player Database <span>| Today</span></h5>
+
+          <table class="table table-borderless datatable" id='dataTbl'>
+            <thead>
+              <tr>              
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+
+
+              </tr>
+            </thead>
+            <tbody id = "tbody1">
+            </tbody> 
+            
+            <script type = "module" id='dataTbl'>
+              var usersNo = 0;
+              var tbody = document.getElementById('tbody1');
+             
+              function AddItemToTable(name,email,hp,timestamp,score,updatedon,active){
+                let trow = document.createElement("tr");
+                let td1 = document.createElement('td');
+                let td2 = document.createElement('td'); 
+                let td3 = document.createElement('td'); 
+
+
+                //
+                td1.innerHTML =++usersNo;                        
+                td2.innerHTML = name;
+                td3.innerHTML = email;                    
+                trow.appendChild(td1);
+                trow.appendChild(td2);
+                trow.appendChild(td3);
+
+                tbody.appendChild(trow);
+
+              }
+
+              function AddAllItemsToTable(TheUserList){
+                usersNo=0;
+                tbody.innerHTML="";
+                TheUserList.forEach(element => {
+                  AddItemToTable(element.UserName, element.Email);
+                });
+
+              }
+              import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+
+              const firebaseConfig = {
+                apiKey: "AIzaSyC7M8y15AU_8rU_xyBnHUeS_GDxSJs-AGY",
+                authDomain: "patient0-7db0f.firebaseapp.com",
+                databaseURL: "https://patient0-7db0f-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "patient0-7db0f",
+                storageBucket: "patient0-7db0f.appspot.com",
+                messagingSenderId: "1096234638540",
+                appId: "1:1096234638540:web:387aab5e84973af87e7669"
+                };
+
+
+              // Initialize Firebase
+               const app = initializeApp(firebaseConfig);
+
+                import { getDatabase, ref, push, child, onValue, get , set, remove, update}
+                from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+              
+              const db = getDatabase();
+
+              function GetAllDataOnce(){
+                const dbRef = ref(db);
+
+                get(child(dbRef, "User"))
+                .then((snapshot)=>{
+                  var users = [];
+
+                  snapshot.forEach(childSnapshot => {
+                    users.push(childSnapshot.val());
+                  });
+
+                  AddAllItemsToTable(users);
+                });
+              }
+              window.onload = GetAllDataOnce;
+              
+              function GetAllDataRealtime(){
+                const dbRef = ref(db, "User");
+
+                onValue(dbRef,(snapshot)=>{
+                  var users = [];
+
+                  snapshot.forEach(childSnapshot => {
+                    users.push(childSnapshot.val());
+                  });
+
+                  AddAllItemsToTable(users);
+                });
+
+
+                // write data
+                submit.addEventListener('click',(e) => {
+                var name = document.getElementById('Playername').value;    
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                    
+
+                set(ref(db, 'User/' + name), {
+                UserName: name,
+                Email : email,
+                Password : password
+
+
+                });
+
+                alert('saved');
+                });
+
+
+
+                // read data
+                getData.addEventListener('click',(e) => {
+
+                $('#dataTbl td').remove();
+                var usersNo=0; 
+                const dbRef = ref(db, 'User/');
+
+                onValue(dbRef, (snapshot) => {
+                snapshot.forEach((childSnapshot) => {
+                const childKey = childSnapshot.key;
+                const childData = childSnapshot.val();
+                 // ...
+                usersNo += 1; 
+                var trow = "<tr><td>" + usersNo + "</td><td>" + childData.name + "</td><td>" + childData.email + "</td></tr>"
+                $(trow).appendTo('IDdataTbl');
+  
+                 });
+                }, {
+                    onlyOnce: true
+                  });
+
+                  });
+
+
+
+                // Remove data
+                deleteData.addEventListener('click',(e) => {  
+                var name = document.getElementById('Playername').value;    
+                var email = document.getElementById('email').value;                        
+                remove(ref(db, 'User/' + name));
+                alert('saved');
+
+                });
+
+
+
+                //Edit Data
+
+                submit.addEventListener('click',(e) => {
+                var name = document.getElementById('Playername').value;    
+                var email = document.getElementById('email').value;  
+                
+                const updates = {};
+                updates['/User/' + name] = postData;
+
+                return update(ref(db), updates);
+                alert('Data Edited');
+
+                });                     
+                const postData = {
+                    UserName: name,
+                    Email : email
+                  };                
+
+              }
+              window.onload = GetAllDataRealtime;
+
+
+               
+            </script>
+        </div>            
+                 
 
     </section>
 

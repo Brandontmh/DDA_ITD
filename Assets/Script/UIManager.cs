@@ -7,14 +7,14 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    public GameObject PauseMenu;
+   /* public GameObject PauseMenu;*/
 
 
     //Screen object variables
     public GameObject loginUI;
     public GameObject registerUI;
     public GameObject mainMenuUI;
-    public bool isPaused;
+    /*public bool isPaused;
 
     void Start()
     {
@@ -79,16 +79,16 @@ public class UIManager : MonoBehaviour
         mainMenuUI.SetActive(true);
     }
 
-    public void ResumeGame()
+   public void ResumeGame()
     {
         Time.timeScale = 1f;
-        isPaused = true;
+       /* isPaused = true; */
     }
-    public void PauseGame()
+   /* public void PauseGame()
     {
         Time.timeScale = 0f;
         isPaused = false;
-    }
+    } */
 
     public void QuitGame()
     {

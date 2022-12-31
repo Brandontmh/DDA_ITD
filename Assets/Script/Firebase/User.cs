@@ -13,7 +13,7 @@ public class User : MonoBehaviour{
     public long updatedOn;
 
 
-        public void NewScoreElement (string _username, int _kills, int _deaths, int _score, int _TimeStamp)
+       public void NewScoreElement (string _username, int _kills, int _deaths, int _score, int _TimeStamp)
     {
         UserName = _username;
         kills = _kills;
@@ -21,6 +21,6 @@ public class User : MonoBehaviour{
         score = _score;
         TimeStamp = _TimeStamp;
         
-    }
+    } 
 
-}
+} 
